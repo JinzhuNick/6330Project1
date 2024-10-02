@@ -47,17 +47,27 @@ public class Enemy : MonoBehaviour
             // 检测玩家是否在索敌范围内
             if (IsPlayerInDetectionRange())
             {
-                // 寻找距离玩家最近的可到达格子
-                GridCell targetCell = FindClosestCellToPlayer();
-                if (targetCell != null)
+                // 检测是否已经与玩家相邻
+                if (IsPlayerAdjacent())
                 {
-                    // 计算路径并开始移动
-                    path = FindPath(currentCell, targetCell);
-                    if (path != null && path.Count > 0)
+                    // 已经在玩家旁边，可以攻击或结束回合
+                    Debug.Log("敌人已在玩家旁边，结束回合");
+                    EndTurn();
+                }
+                else
+                {
+                    // 寻找距离玩家最近的可到达格子
+                    GridCell targetCell = FindClosestCellToPlayer();
+                    if (targetCell != null)
                     {
-                        StartCoroutine(MoveAlongPath());
-                        // 结束当前回合
-                        ifTurn = false;
+                        // 计算路径并开始移动
+                        path = FindPath(currentCell, targetCell);
+                        if (path != null && path.Count > 0)
+                        {
+                            StartCoroutine(MoveAlongPath());
+                            // 结束当前回合
+                            ifTurn = false;
+                        }
                     }
                 }
             }
@@ -343,10 +353,26 @@ public class Enemy : MonoBehaviour
     void EndTurn()
     {
         // 清除可到达的格子状态
+        foreach (GridCell cell in reachableCells)
+        {
+            cell.cellState = CellState.Normal;
+            cell.UpdateVisual();
+        }
         reachableCells.Clear();
         // 清除索敌范围显示（如果有）
         ClearDetectionRange();
         // 结束回合
         ifTurn = false;
+    }
+
+    bool IsPlayerAdjacent()
+    {
+        Character player = FindObjectOfType<Character>();
+        if (player != null)
+        {
+            int distance = Mathf.Abs(currentCell.x - player.currentCell.x) + Mathf.Abs(currentCell.y - player.currentCell.y);
+            return distance == 1;
+        }
+        return false;
     }
 }

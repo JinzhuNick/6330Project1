@@ -58,7 +58,7 @@ public class GridManager : MonoBehaviour
             // 创建格子对象
             GameObject cellObj = Instantiate(cellPrefab, cell.GetCenterPosition(), Quaternion.identity, transform);
             cellObj.name = $"Cell_{cell.x}_{cell.y}";
-            cellObj.transform.localScale = new Vector3(cellSize*0.8f, 0.1f, cellSize * 0.8f);
+            cellObj.transform.localScale = new Vector3(cellSize*0.7f, 0.1f, cellSize * 0.7f);
 
             // 保存格子对象的引用
             cell.cellObject = cellObj;
