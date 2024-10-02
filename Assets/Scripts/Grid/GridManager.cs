@@ -130,15 +130,15 @@ public class GridManager : MonoBehaviour
             switch (cell.cellState)
             {
                 case CellState.Normal:
-                    return Color.white;
+                    return new Color(1, 1, 1, 0.1f); // 白色，透明度降低
                 case CellState.Highlighted:
-                    return Color.green;
+                    return new Color(0, 1, 0, 0.4f); // 绿色
                 case CellState.Selected:
-                    return Color.yellow;
+                    return new Color(1, 1, 0, 0.4f); // 黄色
                 case CellState.Blocked:
-                    return Color.red;
+                    return new Color(1, 0, 0, 0.4f); // 红色
                 default:
-                    return Color.white;
+                    return new Color(1, 1, 1, 0.1f); // 白色，透明度降低
             }
         }
     }

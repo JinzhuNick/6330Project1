@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     public bool ifTurn = false;  // 控制角色是否可以移动
 
     private GridManager gridManager;
-    private GridCell currentCell;
+    public GridCell currentCell;
 
     private List<GridCell> reachableCells = new List<GridCell>();  // 可到达的格子列表
     private List<GridCell> path = new List<GridCell>();  // 角色当前的移动路径
@@ -23,8 +23,8 @@ public class Character : MonoBehaviour
 
         // 初始化角色所在的格子
         Vector3 position = transform.position;
-        int x = Mathf.FloorToInt(position.x / gridManager.cellSize + 1);
-        int y = Mathf.FloorToInt(position.z / gridManager.cellSize + 1);
+        int x = Mathf.FloorToInt(position.x / gridManager.cellSize + 0.5f);
+        int y = Mathf.FloorToInt(position.z / gridManager.cellSize + 0.5f);
 
         currentCell = gridManager.GetCell(x, y);
         if (currentCell != null)
@@ -44,6 +44,9 @@ public class Character : MonoBehaviour
         {
             // 高亮可移动的格子
             HighlightReachableCells();
+
+            // 显示敌人的索敌范围
+            ShowEnemyDetectionRanges();
 
             // 处理鼠标输入
             HandleMouseInput();
@@ -67,6 +70,10 @@ public class Character : MonoBehaviour
 
         frontier.Enqueue(currentCell);
         costSoFar[currentCell] = 0;
+
+        // 将当前格子加入可到达的格子列表，并设置状态
+        reachableCells.Add(currentCell);
+        currentCell.SetCellState(CellState.Highlighted);
 
         while (frontier.Count > 0)
         {
@@ -209,7 +216,7 @@ public class Character : MonoBehaviour
             currentCell = cell;
 
             // 更新朝向
-            UpdateFacingDirection(transform.position, cell.GetCenterPosition());
+            //UpdateFacingDirection(transform.position, cell.GetCenterPosition());
 
             // 平滑移动到下一个格子
             Vector3 startPosition = transform.position;
@@ -227,7 +234,7 @@ public class Character : MonoBehaviour
             transform.position = endPosition;
         }
 
-        // 移动结束后，清空路径和高亮
+        // 移动结束后，清空路径和高亮以及敌人的索敌范围
         path.Clear();
         foreach (GridCell cell in reachableCells)
         {
@@ -235,6 +242,17 @@ public class Character : MonoBehaviour
             cell.UpdateVisual();
         }
         reachableCells.Clear();
+        ClearEnemyDetectionRanges();
+    }
+
+    // 清除敌人索敌范围
+    void ClearEnemyDetectionRanges()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.ClearDetectionRange();
+        }
     }
 
     // 更新角色朝向
@@ -254,5 +272,15 @@ public class Character : MonoBehaviour
     int Heuristic(GridCell a, GridCell b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
+    // 显示所有敌人的索敌范围
+    void ShowEnemyDetectionRanges()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.ShowDetectionRange();
+        }
     }
 }
