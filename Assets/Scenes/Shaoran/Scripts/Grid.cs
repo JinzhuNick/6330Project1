@@ -31,15 +31,19 @@ public class Grid
         {
             for (int z = 0; z < gridArray.GetLength(1); z++)
             {
-                //debugTextArray[x, z] = UtilsClass.CreateWorldText("", null, GetWorldPosition(x + 1, 0, z + 1));
                 isOcupiedArray[x, z] = false;
             }
         }
     }
 
-    public Vector3 GetWorldPosition(int x, float y, int z)
+    public Vector3 GetWorldPosition(int x,float y, int z)
     {
-        return new Vector3(x, y, z) * cellSize;
+        float xWorldPosition;
+        float yWorldPosition;
+
+        xWorldPosition = x * cellSize ;
+        yWorldPosition = z * cellSize ;
+        return new Vector3(xWorldPosition, y, yWorldPosition);
     }
 
     private void GetXY(Vector3 worldPosition, out int x, out int y)

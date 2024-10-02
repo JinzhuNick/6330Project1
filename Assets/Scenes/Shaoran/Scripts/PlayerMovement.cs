@@ -6,11 +6,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject mainCameraGameObject;
     public Camera mainCamera;
     public float cameraDepth;
     public LayerMask layerMask;
     public bool isSelected;
 
+    public void Awake()
+    {
+        Initialize();
+    }
     public void Update()
     {
         if (Input.GetMouseButtonDown(0) && isSelected) 
@@ -45,12 +50,10 @@ public class PlayerMovement : MonoBehaviour
             await Task.Delay(1);
             isSelected = true;
         }
-
     }
 
     private void MovePlayer()
     {
-  
         this.GetComponent<Rigidbody>().isKinematic = true;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layerMask))
