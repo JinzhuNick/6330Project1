@@ -123,7 +123,7 @@ public class GridManager : MonoBehaviour
     {
         if (!cell.isWalkable)
         {
-            return Color.red;
+            return new Color(1, 0, 0, 0.4f); // 红色
         }
         else
         {

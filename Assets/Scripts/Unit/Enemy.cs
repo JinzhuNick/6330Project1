@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
+    public int maxHealth;
     public int health;
     public int attackPower;
     public int movementRange;
@@ -68,6 +69,12 @@ public class Enemy : MonoBehaviour
                             // 结束当前回合
                             ifTurn = false;
                         }
+                    }
+                    else
+                    {
+                        // 无法找到路径或路径为空，结束回合
+                        Debug.Log("无法找到路径，结束回合");
+                        EndTurn();
                     }
                 }
             }

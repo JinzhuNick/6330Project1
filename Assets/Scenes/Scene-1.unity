@@ -377,6 +377,74 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1001 &944376170
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 59357445666108283, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyBread1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.9383454
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.009999752
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.999749
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 406d21dcd8df7ce47a5be07097786938, type: 3}
 --- !u!1 &1068606323
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +544,7 @@ Transform:
   m_GameObject: {fileID: 1068606323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.93, y: 0.31, z: 2.99}
+  m_LocalPosition: {x: 2.93, y: 0.58, z: 8.44}
   m_LocalScale: {x: 4.625463, y: 1, z: 0.77248}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -529,8 +597,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 8922221143307676393, guid: 44d58da870ee137438976a9311b7ec49,
     type: 3}
-  gridWidth: 10
-  gridHeight: 10
+  gridWidth: 6
+  gridHeight: 6
   cellSize: 1
   gridCellsList:
   - x: 0
@@ -581,38 +649,6 @@ MonoBehaviour:
     isWalkable: 1
     cellState: 0
     cellObject: {fileID: 0}
-  - x: 0
-    y: 6
-    worldPosition: {x: 0, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 0
-    y: 7
-    worldPosition: {x: 0, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 0
-    y: 8
-    worldPosition: {x: 0, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 0
-    y: 9
-    worldPosition: {x: 0, y: 0, z: 9}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
   - x: 1
     y: 0
     worldPosition: {x: 1, y: 0, z: 0}
@@ -634,7 +670,7 @@ MonoBehaviour:
     worldPosition: {x: 1, y: 0, z: 2}
     occupant: {fileID: 0}
     facingDirection: 0
-    isWalkable: 1
+    isWalkable: 0
     cellState: 0
     cellObject: {fileID: 0}
   - x: 1
@@ -642,7 +678,7 @@ MonoBehaviour:
     worldPosition: {x: 1, y: 0, z: 3}
     occupant: {fileID: 0}
     facingDirection: 0
-    isWalkable: 0
+    isWalkable: 1
     cellState: 0
     cellObject: {fileID: 0}
   - x: 1
@@ -661,38 +697,6 @@ MonoBehaviour:
     isWalkable: 1
     cellState: 0
     cellObject: {fileID: 0}
-  - x: 1
-    y: 6
-    worldPosition: {x: 1, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 1
-    y: 7
-    worldPosition: {x: 1, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 1
-    y: 8
-    worldPosition: {x: 1, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 1
-    y: 9
-    worldPosition: {x: 1, y: 0, z: 9}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
   - x: 2
     y: 0
     worldPosition: {x: 2, y: 0, z: 0}
@@ -706,7 +710,7 @@ MonoBehaviour:
     worldPosition: {x: 2, y: 0, z: 1}
     occupant: {fileID: 0}
     facingDirection: 0
-    isWalkable: 1
+    isWalkable: 0
     cellState: 0
     cellObject: {fileID: 0}
   - x: 2
@@ -741,38 +745,6 @@ MonoBehaviour:
     isWalkable: 1
     cellState: 0
     cellObject: {fileID: 0}
-  - x: 2
-    y: 6
-    worldPosition: {x: 2, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 2
-    y: 7
-    worldPosition: {x: 2, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 2
-    y: 8
-    worldPosition: {x: 2, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 2
-    y: 9
-    worldPosition: {x: 2, y: 0, z: 9}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
   - x: 3
     y: 0
     worldPosition: {x: 3, y: 0, z: 0}
@@ -794,7 +766,7 @@ MonoBehaviour:
     worldPosition: {x: 3, y: 0, z: 2}
     occupant: {fileID: 0}
     facingDirection: 0
-    isWalkable: 1
+    isWalkable: 0
     cellState: 0
     cellObject: {fileID: 0}
   - x: 3
@@ -802,7 +774,7 @@ MonoBehaviour:
     worldPosition: {x: 3, y: 0, z: 3}
     occupant: {fileID: 0}
     facingDirection: 0
-    isWalkable: 0
+    isWalkable: 1
     cellState: 0
     cellObject: {fileID: 0}
   - x: 3
@@ -816,38 +788,6 @@ MonoBehaviour:
   - x: 3
     y: 5
     worldPosition: {x: 3, y: 0, z: 5}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 3
-    y: 6
-    worldPosition: {x: 3, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 3
-    y: 7
-    worldPosition: {x: 3, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 3
-    y: 8
-    worldPosition: {x: 3, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 3
-    y: 9
-    worldPosition: {x: 3, y: 0, z: 9}
     occupant: {fileID: 0}
     facingDirection: 0
     isWalkable: 1
@@ -882,7 +822,7 @@ MonoBehaviour:
     worldPosition: {x: 4, y: 0, z: 3}
     occupant: {fileID: 0}
     facingDirection: 0
-    isWalkable: 0
+    isWalkable: 1
     cellState: 0
     cellObject: {fileID: 0}
   - x: 4
@@ -896,38 +836,6 @@ MonoBehaviour:
   - x: 4
     y: 5
     worldPosition: {x: 4, y: 0, z: 5}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 4
-    y: 6
-    worldPosition: {x: 4, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 4
-    y: 7
-    worldPosition: {x: 4, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 4
-    y: 8
-    worldPosition: {x: 4, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 4
-    y: 9
-    worldPosition: {x: 4, y: 0, z: 9}
     occupant: {fileID: 0}
     facingDirection: 0
     isWalkable: 1
@@ -962,7 +870,7 @@ MonoBehaviour:
     worldPosition: {x: 5, y: 0, z: 3}
     occupant: {fileID: 0}
     facingDirection: 0
-    isWalkable: 0
+    isWalkable: 1
     cellState: 0
     cellObject: {fileID: 0}
   - x: 5
@@ -976,358 +884,6 @@ MonoBehaviour:
   - x: 5
     y: 5
     worldPosition: {x: 5, y: 0, z: 5}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 5
-    y: 6
-    worldPosition: {x: 5, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 5
-    y: 7
-    worldPosition: {x: 5, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 5
-    y: 8
-    worldPosition: {x: 5, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 5
-    y: 9
-    worldPosition: {x: 5, y: 0, z: 9}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 0
-    worldPosition: {x: 6, y: 0, z: 0}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 1
-    worldPosition: {x: 6, y: 0, z: 1}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 2
-    worldPosition: {x: 6, y: 0, z: 2}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 3
-    worldPosition: {x: 6, y: 0, z: 3}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 4
-    worldPosition: {x: 6, y: 0, z: 4}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 5
-    worldPosition: {x: 6, y: 0, z: 5}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 6
-    worldPosition: {x: 6, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 7
-    worldPosition: {x: 6, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 8
-    worldPosition: {x: 6, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 6
-    y: 9
-    worldPosition: {x: 6, y: 0, z: 9}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 0
-    worldPosition: {x: 7, y: 0, z: 0}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 1
-    worldPosition: {x: 7, y: 0, z: 1}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 2
-    worldPosition: {x: 7, y: 0, z: 2}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 3
-    worldPosition: {x: 7, y: 0, z: 3}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 4
-    worldPosition: {x: 7, y: 0, z: 4}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 5
-    worldPosition: {x: 7, y: 0, z: 5}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 6
-    worldPosition: {x: 7, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 7
-    worldPosition: {x: 7, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 8
-    worldPosition: {x: 7, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 7
-    y: 9
-    worldPosition: {x: 7, y: 0, z: 9}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 0
-    worldPosition: {x: 8, y: 0, z: 0}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 1
-    worldPosition: {x: 8, y: 0, z: 1}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 2
-    worldPosition: {x: 8, y: 0, z: 2}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 3
-    worldPosition: {x: 8, y: 0, z: 3}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 4
-    worldPosition: {x: 8, y: 0, z: 4}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 5
-    worldPosition: {x: 8, y: 0, z: 5}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 6
-    worldPosition: {x: 8, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 7
-    worldPosition: {x: 8, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 8
-    worldPosition: {x: 8, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 8
-    y: 9
-    worldPosition: {x: 8, y: 0, z: 9}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 0
-    worldPosition: {x: 9, y: 0, z: 0}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 1
-    worldPosition: {x: 9, y: 0, z: 1}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 2
-    worldPosition: {x: 9, y: 0, z: 2}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 3
-    worldPosition: {x: 9, y: 0, z: 3}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 4
-    worldPosition: {x: 9, y: 0, z: 4}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 5
-    worldPosition: {x: 9, y: 0, z: 5}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 6
-    worldPosition: {x: 9, y: 0, z: 6}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 7
-    worldPosition: {x: 9, y: 0, z: 7}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 8
-    worldPosition: {x: 9, y: 0, z: 8}
-    occupant: {fileID: 0}
-    facingDirection: 0
-    isWalkable: 1
-    cellState: 0
-    cellObject: {fileID: 0}
-  - x: 9
-    y: 9
-    worldPosition: {x: 9, y: 0, z: 9}
     occupant: {fileID: 0}
     facingDirection: 0
     isWalkable: 1
@@ -1446,7 +1002,7 @@ Transform:
   m_GameObject: {fileID: 1455403619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.83, y: -0.33, z: 4.4905}
+  m_LocalPosition: {x: 4.83, y: 0.02, z: 4.4905}
   m_LocalScale: {x: 2.37, y: 2.37, z: 2.37}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1470,7 +1026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!483693784 &1580482211
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -1611,7 +1167,7 @@ PrefabInstance:
     - target: {fileID: 4528357278786018079, guid: 78c386b2314fc0640b1699dec9b6318c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.94
+      value: 1.943
       objectReference: {fileID: 0}
     - target: {fileID: 4528357278786018079, guid: 78c386b2314fc0640b1699dec9b6318c,
         type: 3}
@@ -1621,7 +1177,7 @@ PrefabInstance:
     - target: {fileID: 4528357278786018079, guid: 78c386b2314fc0640b1699dec9b6318c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.96
+      value: 3.955
       objectReference: {fileID: 0}
     - target: {fileID: 4528357278786018079, guid: 78c386b2314fc0640b1699dec9b6318c,
         type: 3}
@@ -1657,6 +1213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522359456706886578, guid: 78c386b2314fc0640b1699dec9b6318c,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1679,7 +1240,7 @@ PrefabInstance:
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.06
+      value: 1.94
       objectReference: {fileID: 0}
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
@@ -1689,7 +1250,7 @@ PrefabInstance:
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.03
+      value: 1.79
       objectReference: {fileID: 0}
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
@@ -1725,6 +1286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365893231157795730, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8329018365056637718, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
@@ -1748,3 +1314,4 @@ SceneRoots:
   - {fileID: 7454638613109138808}
   - {fileID: 1455403623}
   - {fileID: 1068606327}
+  - {fileID: 944376170}

@@ -5,6 +5,7 @@ using System.Collections;
 public class Character : MonoBehaviour
 {
     public int attackPower;
+    public int maxHealth;
     public int health;
     public int movementRange;
     public float speed;  // 控制移动速度
