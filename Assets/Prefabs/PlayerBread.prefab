@@ -229,6 +229,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Healthbar Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7722166101445539224, guid: 345906b8eadb2554aadc674c16ed6e8e,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 63.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722166101445539224, guid: 345906b8eadb2554aadc674c16ed6e8e,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 63.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -282,7 +292,7 @@ PrefabInstance:
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.38
+      value: 1.56
       objectReference: {fileID: 0}
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
@@ -307,12 +317,12 @@ PrefabInstance:
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.31
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.63
+      value: 2.08
       objectReference: {fileID: 0}
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
