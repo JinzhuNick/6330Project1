@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Character : MonoBehaviour
     private List<GridCell> path = new List<GridCell>();  // 角色当前的移动路径
 
     public GameObject damageTextPrefab;
+
 
     // 技能列表
     private List<Skill> skills = new List<Skill>();
@@ -407,6 +409,7 @@ public class Character : MonoBehaviour
     {
         // 死亡处理
         currentCell.occupant = null;
+
         Debug.Log("玩家死亡！");
         // 可以添加游戏结束逻辑
     }

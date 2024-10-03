@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class Enemy : MonoBehaviour
 
     public GameObject damageTextPrefab;
 
+    //Events
+    public delegate void OnEnemyDeath(GameObject enemy);
+    public static event OnEnemyDeath onEnemyDeath;
     public virtual void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
@@ -501,6 +505,7 @@ public class Enemy : MonoBehaviour
     {
         // 死亡处理
         currentCell.occupant = null;
+        onEnemyDeath?.Invoke(this.gameObject);
         Destroy(gameObject);
     }
 }
