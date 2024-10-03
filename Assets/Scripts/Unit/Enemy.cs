@@ -6,11 +6,13 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth;
     public int health;
-    public int attackPower;
+    public int minAttack = 2;
+    public int maxAttack = 3 ;
     public int movementRange;
     public float speed;
     public int detectionRange;
     public bool ifTurn = false;
+    public bool ifAttack = false; // 敌人是否进入攻击阶段
 
     protected GridManager gridManager;
     protected GridCell currentCell;
@@ -23,10 +25,14 @@ public class Enemy : MonoBehaviour
 
         // 初始化单位所在的格子
         Vector3 position = transform.position;
-        int x = Mathf.FloorToInt(position.x / gridManager.cellSize + 1);
-        int y = Mathf.FloorToInt(position.z / gridManager.cellSize + 1);
+        int x = Mathf.FloorToInt(position.x / gridManager.cellSize + 0.5f);
+        int y = Mathf.FloorToInt(position.z / gridManager.cellSize + 0.5f);
 
         currentCell = gridManager.GetCell(x, y);
+
+        Debug.Log("敌人初始化格子："+x +","+y);
+        
+
         if (currentCell != null)
         {
             currentCell.occupant = gameObject;
@@ -82,12 +88,17 @@ public class Enemy : MonoBehaviour
             {
                 foreach (GridCell cell in reachableCells)
                 {
-                    cell.cellState = CellState.Normal;
+                    cell.ClearCellStates();
                     cell.UpdateVisual();
                 }
-                // 玩家不在索敌范围内，可以执行其他行为（例如原地待机）
+                // 玩家不在索敌范围内，可以执行其他行为
                 ifTurn = false;
             }
+        }
+        if (ifAttack)
+        {
+            // 攻击逻辑
+            StartCoroutine(PerformAttack());
         }
     }
 
@@ -96,9 +107,16 @@ public class Enemy : MonoBehaviour
         // 清除之前的高亮
         foreach (GridCell cell in reachableCells)
         {
+            cell.RemoveCellState(CellState.Highlighted);
+        }
+        reachableCells.Clear();
+        /*
+        foreach (GridCell cell in reachableCells)
+        {
             cell.cellState = CellState.Normal;
             cell.UpdateVisual();
         }
+        */
         reachableCells.Clear();
 
         // 使用广度优先搜索计算可到达的格子
@@ -110,7 +128,7 @@ public class Enemy : MonoBehaviour
 
         // 将当前格子加入可到达的格子列表，并设置状态
         reachableCells.Add(currentCell);
-        currentCell.SetCellState(CellState.Highlighted);
+        currentCell.AddCellState(CellState.Highlighted);
 
         while (frontier.Count > 0)
         {
@@ -135,7 +153,8 @@ public class Enemy : MonoBehaviour
                     frontier.Enqueue(next);
                     reachableCells.Add(next);
 
-                    next.cellState = CellState.Highlighted;
+                    //next.cellState = CellState.Highlighted;
+                    next.AddCellState(CellState.Highlighted);
                     next.UpdateVisual();
                 }
             }
@@ -234,7 +253,9 @@ public class Enemy : MonoBehaviour
         path.Clear();
         foreach (GridCell cell in reachableCells)
         {
-            cell.cellState = CellState.Normal;
+            //cell.cellState = CellState.Normal;
+            cell.RemoveCellState(CellState.Highlighted);
+            cell.RemoveCellState(CellState.Selected);
             cell.UpdateVisual();
         }
         reachableCells.Clear();
@@ -325,12 +346,13 @@ public class Enemy : MonoBehaviour
                 visited.Add(next);
 
                 // 墙体（Blocked）优先显示，不覆盖
-                if (next.cellState == CellState.Blocked)
+                if (next.isWalkable == false)
                 {
                     continue;
                 }
 
-                next.SetCellState(CellState.Selected);  // 黄色表示索敌范围
+                //next.SetCellState(CellState.Selected);  // 黄色表示索敌范围
+                next.AddCellState(CellState.Selected);
                 detectionRangeCells.Add(next);
 
                 // 索敌范围可以穿墙
@@ -348,9 +370,9 @@ public class Enemy : MonoBehaviour
         foreach (GridCell cell in detectionRangeCells)
         {
             // 只在状态为 Selected 时重置，以免覆盖其他状态
-            if (cell.cellState == CellState.Selected)
+            if (cell.IsStateInCellStates(CellState.Selected))
             {
-                cell.cellState = CellState.Normal;
+                cell.ClearCellStates();
                 cell.UpdateVisual();
             }
         }
@@ -362,7 +384,7 @@ public class Enemy : MonoBehaviour
         // 清除可到达的格子状态
         foreach (GridCell cell in reachableCells)
         {
-            cell.cellState = CellState.Normal;
+            cell.ClearCellStates();
             cell.UpdateVisual();
         }
         reachableCells.Clear();
@@ -381,5 +403,67 @@ public class Enemy : MonoBehaviour
             return distance == 1;
         }
         return false;
+    }
+
+    Character CheckForPlayerInRange()
+    {
+        foreach (GridCell neighbor in gridManager.GetNeighbors(currentCell))
+        {
+            if (neighbor.occupant != null)
+            {
+                Character player = neighbor.occupant.GetComponent<Character>();
+                if (player != null)
+                {
+                    return player;
+                }
+            }
+        }
+        return null;
+    }
+
+    IEnumerator PerformAttack()
+    {
+        ifAttack = false; // 防止重复进入
+
+        // 检测周围是否有玩家
+        Character player = CheckForPlayerInRange();
+        if (player != null)
+        {
+            // 前摇
+            yield return new WaitForSeconds(0.1f);
+
+            // 计算伤害
+            int damage = Random.Range(minAttack, maxAttack + 1);
+            player.TakeDamage(damage);
+
+            // 后摇
+            yield return new WaitForSeconds(0.5f);
+
+            // 攻击结束
+            EndTurn();
+        }
+        else
+        {
+            // 没有玩家在攻击范围内，结束回合
+            EndTurn();
+        }
+    }
+
+    //受到伤害
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log($"敌人受到 {damage} 点伤害，剩余血量：{health}");
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        // 死亡处理
+        currentCell.occupant = null;
+        Destroy(gameObject);
     }
 }

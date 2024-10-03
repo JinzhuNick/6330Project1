@@ -53,7 +53,6 @@ public class GridManagerEditor : Editor
                 SerializedProperty xProp = cellProp.FindPropertyRelative("x");
                 SerializedProperty yProp = cellProp.FindPropertyRelative("y");
                 SerializedProperty isWalkableProp = cellProp.FindPropertyRelative("isWalkable");
-                SerializedProperty cellStateProp = cellProp.FindPropertyRelative("cellState");
 
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField($"格子 ({xProp.intValue}, {yProp.intValue})", GUILayout.Width(100));
@@ -66,17 +65,6 @@ public class GridManagerEditor : Editor
                     // 当 isWalkable 修改后，更新格子视觉
                     GridCell cell = gridManager.gridCellsList[i];
                     cell.isWalkable = isWalkableProp.boolValue;
-                    cell.UpdateVisual();
-                }
-
-                // 使用 PropertyField 绘制 cellState 属性
-                EditorGUI.BeginChangeCheck();
-                EditorGUILayout.PropertyField(cellStateProp, GUIContent.none, GUILayout.Width(100));
-                if (EditorGUI.EndChangeCheck())
-                {
-                    // 当 cellState 修改后，更新格子视觉
-                    GridCell cell = gridManager.gridCellsList[i];
-                    cell.cellState = (CellState)cellStateProp.enumValueIndex;
                     cell.UpdateVisual();
                 }
 

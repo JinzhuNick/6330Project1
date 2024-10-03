@@ -440,6 +440,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1365893231157795730, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: ifAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365893231157795730, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: maxAttack
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365893231157795730, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: minAttack
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1002,7 +1017,7 @@ Transform:
   m_GameObject: {fileID: 1455403619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.83, y: 0.02, z: 4.4905}
+  m_LocalPosition: {x: 4.83, y: -0.07, z: 4.4905}
   m_LocalScale: {x: 2.37, y: 2.37, z: 2.37}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1240,7 +1255,7 @@ PrefabInstance:
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.94
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
@@ -1250,7 +1265,7 @@ PrefabInstance:
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.79
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 113644962456790546, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
@@ -1289,8 +1304,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1365893231157795730, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}
+      propertyPath: maxAttack
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365893231157795730, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
       propertyPath: maxHealth
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365893231157795730, guid: 406d21dcd8df7ce47a5be07097786938,
+        type: 3}
+      propertyPath: minAttack
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8329018365056637718, guid: 406d21dcd8df7ce47a5be07097786938,
         type: 3}

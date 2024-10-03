@@ -22,7 +22,7 @@ public class GridManager : MonoBehaviour
 #if UNITY_EDITOR
         if (gridCellsList.Count > 0)
         {
-            if (!UnityEditor.EditorUtility.DisplayDialog("警告", "这将重置当前的格子列表，是否继续？", "是", "否"))
+            if (!UnityEditor.EditorUtility.DisplayDialog("This will reset the grid list", "是", "否"))
             {
                 return;
             }
@@ -84,23 +84,6 @@ public class GridManager : MonoBehaviour
             // 设置格子颜色
             Gizmos.color = cell.isWalkable ? new Color(0, 1, 0, 0.5f) : new Color(1, 0, 0, 0.5f);
             Gizmos.DrawCube(cell.GetCenterPosition(), new Vector3(cellSize, 0.1f, cellSize));
-
-            // 根据格子状态绘制边框
-            switch (cell.cellState)
-            {
-                case CellState.Normal:
-                    Gizmos.color = Color.white;
-                    break;
-                case CellState.Highlighted:
-                    Gizmos.color = Color.yellow;
-                    break;
-                case CellState.Selected:
-                    Gizmos.color = Color.blue;
-                    break;
-                case CellState.Blocked:
-                    Gizmos.color = Color.black;
-                    break;
-            }
             Gizmos.DrawWireCube(cell.GetCenterPosition(), new Vector3(cellSize, 0.1f, cellSize));
         }
     }
@@ -121,6 +104,62 @@ public class GridManager : MonoBehaviour
     // 根据格子的状态获取颜色
     public Color GetCellColor(GridCell cell)
     {
+        HashSet<CellState> states = cell.GetCellStates();
+
+        Color normalColor = new Color(1, 1, 1, 0.1f); // 白色，透明度降低
+        Color highlightedColor = new Color(0, 1, 0, 0.4f); // 绿色
+        Color selectedColor = new Color(1, 1, 0, 0.4f); // 黄色
+        Color blockedColor = new Color(1, 0, 0, 1f); // 红色
+
+        Color finalColor = new Color(0, 0, 0, 0);
+
+        if (!cell.isWalkable)
+        {
+            return new Color(1, 0, 0, 0.4f); // 红色
+        }
+
+        if (states == null || states.Count == 0)
+        {
+            //finalColor = normalColor;
+            return new Color(1, 1, 1, 0.1f);
+        }
+
+        // 累加颜色
+        foreach (CellState state in states)
+        {
+            switch (state)
+            {
+                case CellState.Normal:
+                    finalColor += normalColor;
+                    break;
+                case CellState.Highlighted:
+                    finalColor += highlightedColor;
+                    break;
+                case CellState.Selected:
+                    finalColor += selectedColor;
+                    break;
+                case CellState.Blocked:
+                    finalColor += blockedColor;
+                    break;
+                case CellState.Active:
+                    finalColor += blockedColor;
+                    break;
+            }
+            
+        }
+
+        // 限制颜色的最大值为1
+        finalColor.r = Mathf.Clamp(finalColor.r, 0, 1);
+        finalColor.g = Mathf.Clamp(finalColor.g, 0, 1);
+        finalColor.b = Mathf.Clamp(finalColor.b, 0, 1);
+        finalColor.a = Mathf.Clamp(finalColor.a, 0, 1);
+
+        // 如果没有任何状态，使用默认颜色
+
+
+        return finalColor;
+
+        /*
         if (!cell.isWalkable)
         {
             return new Color(1, 0, 0, 0.4f); // 红色
@@ -141,6 +180,7 @@ public class GridManager : MonoBehaviour
                     return new Color(1, 1, 1, 0.1f); // 白色，透明度降低
             }
         }
+        */
     }
 
     public List<GridCell> GetNeighbors(GridCell cell)

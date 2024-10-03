@@ -17,7 +17,6 @@ public class CellStateController : MonoBehaviour
         GridCell cell = gridManager.GetCell(x, y);
         if (cell != null)
         {
-            cell.cellState = newState;
 #if UNITY_EDITOR
             UnityEditor.SceneView.RepaintAll();
 #endif

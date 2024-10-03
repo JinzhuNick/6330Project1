@@ -11,16 +11,27 @@ public class Character : MonoBehaviour
     public float speed;  // 控制移动速度
 
     public bool ifTurn = false;  // 控制角色是否可以移动
+    public bool ifAttack = false; // 角色是否进入攻击阶段
 
-    private GridManager gridManager;
+    public GridManager gridManager;
     public GridCell currentCell;
 
     private List<GridCell> reachableCells = new List<GridCell>();  // 可到达的格子列表
     private List<GridCell> path = new List<GridCell>();  // 角色当前的移动路径
 
+    // 技能列表
+    private List<Skill> skills = new List<Skill>();
+    // 当前选择的技能
+    public Skill selectedSkill = null;
+
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
+
+        // 初始化技能
+        skills.Add(new NormalAttackSkill());
+        skills.Add(new Skill1());
+        skills.Add(new Skill2()); 
 
         // 初始化角色所在的格子
         Vector3 position = transform.position;
@@ -37,6 +48,7 @@ public class Character : MonoBehaviour
         {
             Debug.LogError("角色初始化位置不在任何格子上！");
         }
+
     }
 
     void Update()
@@ -52,6 +64,12 @@ public class Character : MonoBehaviour
             // 处理鼠标输入
             HandleMouseInput();
         }
+
+        if(ifAttack)
+        {
+            // 攻击逻辑
+            HandleAttackInput();
+        }
     }
 
     // 高亮可到达的格子
@@ -60,9 +78,16 @@ public class Character : MonoBehaviour
         // 清除之前的高亮
         foreach (GridCell cell in reachableCells)
         {
+            cell.RemoveCellState(CellState.Highlighted);
+        }
+        reachableCells.Clear();
+        /*
+        foreach (GridCell cell in reachableCells)
+        {
             cell.cellState = CellState.Normal;
             cell.UpdateVisual();
         }
+        */
         reachableCells.Clear();
 
         // 使用广度优先搜索计算可到达的格子
@@ -74,7 +99,7 @@ public class Character : MonoBehaviour
 
         // 将当前格子加入可到达的格子列表，并设置状态
         reachableCells.Add(currentCell);
-        currentCell.SetCellState(CellState.Highlighted);
+        currentCell.AddCellState(CellState.Highlighted);
 
         while (frontier.Count > 0)
         {
@@ -99,7 +124,8 @@ public class Character : MonoBehaviour
                     frontier.Enqueue(next);
                     reachableCells.Add(next);
 
-                    next.cellState = CellState.Highlighted;
+                    //next.cellState = CellState.Highlighted;
+                    next.AddCellState(CellState.Highlighted);
                     next.UpdateVisual();
                 }
             }
@@ -133,7 +159,7 @@ public class Character : MonoBehaviour
     }
 
     // 根据世界坐标获取对应的格子
-    GridCell GetCellFromPosition(Vector3 position)
+    public GridCell GetCellFromPosition(Vector3 position)
     {
         int x = Mathf.FloorToInt(position.x / gridManager.cellSize + 0.5f);
         int y = Mathf.FloorToInt(position.z / gridManager.cellSize + 0.5f);
@@ -239,7 +265,8 @@ public class Character : MonoBehaviour
         path.Clear();
         foreach (GridCell cell in reachableCells)
         {
-            cell.cellState = CellState.Normal;
+            cell.ClearCellStates();
+            //cell.AddCellState(CellState.Normal);
             cell.UpdateVisual();
         }
         reachableCells.Clear();
@@ -283,5 +310,71 @@ public class Character : MonoBehaviour
         {
             enemy.ShowDetectionRange();
         }
+    }
+
+    void HandleAttackInput()
+    {
+        // 选择技能
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectSkill(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectSkill(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectSkill(2);
+        }
+
+        // 取消攻击
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            CancelAttack();
+        }
+
+        // 处理技能释放
+        if (selectedSkill != null)
+        {
+            selectedSkill.UpdateSkill(this);
+        }
+
+        void SelectSkill(int index)
+        {
+            if (index >= 0 && index < skills.Count)
+            {
+                selectedSkill = skills[index];
+                selectedSkill.OnSelect(this);
+            }
+        }
+
+        void CancelAttack()
+        {
+            if (selectedSkill != null)
+            {
+                selectedSkill.OnCancel(this);
+                selectedSkill = null;
+            }
+        }
+
+    }
+    // 受到伤害
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log($"玩家受到 {damage} 点伤害，剩余血量：{health}");
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        // 死亡处理
+        currentCell.occupant = null;
+        Debug.Log("玩家死亡！");
+        // 可以添加游戏结束逻辑
     }
 }
