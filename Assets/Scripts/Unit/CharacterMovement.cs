@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
     private List<GridCell> path = new List<GridCell>();  // 角色当前的移动路径
 
     public GameObject damageTextPrefab;
+    public GameObject AttackPhase;
+    public GameObject MovePhase;
 
 
     // 技能列表
@@ -63,6 +65,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(ifEndMove);
         if (ifTurn)
         {
             // 高亮可移动的格子
@@ -81,6 +84,18 @@ public class Character : MonoBehaviour
             // 攻击逻辑
             HandleAttackInput();
         }
+
+        if(ifEndMove)
+        {
+            MovePhase.SetActive(true);
+        }
+        else MovePhase.SetActive(false);
+
+        if(ifAttack)
+        {
+            AttackPhase.SetActive(true);
+        }
+        else AttackPhase.SetActive(false);
     }
 
     // 高亮可到达的格子
@@ -156,6 +171,22 @@ public class Character : MonoBehaviour
                 GridCell clickedCell = GetCellFromPosition(hit.point);
                 if (clickedCell != null && reachableCells.Contains(clickedCell))
                 {
+                    if(clickedCell == currentCell)
+                    {
+                        foreach (GridCell cell in reachableCells)
+                        {
+                            cell.ClearCellStates();
+                            //cell.AddCellState(CellState.Normal);
+                            cell.UpdateVisual();
+                        }
+                        reachableCells.Clear();
+                        ClearEnemyDetectionRanges();
+                        ifTurn = false;
+                        Debug.Log(ifEndMove);
+                        ifEndMove = false;
+                        Debug.Log(ifEndMove);
+                        return;
+                    }
                     // 计算路径并开始移动
                     path = FindPath(currentCell, clickedCell);
                     if (path != null && path.Count > 0)
