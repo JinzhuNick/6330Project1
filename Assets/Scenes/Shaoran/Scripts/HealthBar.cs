@@ -11,19 +11,20 @@ public class Healthbar : MonoBehaviour
 
     private void Awake()
     {
-        Enemy.onEnemyHurt  += OnEnemyHurtEvent;
+        Enemy.onEnemyHurt  += OnHurtEvent;
+        Character.onCharacterHurt += OnHurtEvent;
     }
 
     private void OnDestroy()
     {
-        Enemy.onEnemyHurt -= OnEnemyHurtEvent;
+        Enemy.onEnemyHurt -= OnHurtEvent;
+        Character.onCharacterHurt -= OnHurtEvent;
     }
 
-    private void OnEnemyHurtEvent(float maxHealth, float currentHealth, GameObject hurtObject)
+    private void OnHurtEvent(float maxHealth, float currentHealth, GameObject hurtObject)
     {
         if (hurtObject == this.gameObject) { UpdateHealthBar(maxHealth, currentHealth); }
     }
-
 
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {

@@ -29,6 +29,9 @@ public class Character : MonoBehaviour
     // 当前选择的技能
     public Skill selectedSkill = null;
 
+    //Events
+    public delegate void OnCharacterHurt(float maxHealth, float currentHealth, GameObject hurtObject);
+    public static event OnCharacterHurt onCharacterHurt;
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
@@ -53,6 +56,8 @@ public class Character : MonoBehaviour
         {
             Debug.LogError("角色初始化位置不在任何格子上！");
         }
+
+        health = maxHealth;
 
     }
 
@@ -371,6 +376,7 @@ public class Character : MonoBehaviour
     {
         health -= damage;
         Debug.Log($"玩家受到 {damage} 点伤害，剩余血量：{health}");
+        onCharacterHurt?.Invoke((float)maxHealth, (float)health, this.gameObject);
         ShowDamageText(damage);
         if (health <= 0)
         {
