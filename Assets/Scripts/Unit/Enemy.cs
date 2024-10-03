@@ -28,6 +28,10 @@ public class Enemy : MonoBehaviour
     //Events
     public delegate void OnEnemyDeath(GameObject enemy);
     public static event OnEnemyDeath onEnemyDeath;
+
+    public delegate void OnEnemyHurt(float maxHealth, float currentHealth, GameObject hurtObject);
+    public static event OnEnemyHurt onEnemyHurt;
+
     public virtual void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
@@ -466,8 +470,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        onEnemyHurt?.Invoke((float)maxHealth, (float)health, this.gameObject);
         Debug.Log($"敌人受到 {damage} 点伤害，剩余血量：{health}");
         ShowDamageText(damage);
+
         if (health <= 0)
         {
             Die();

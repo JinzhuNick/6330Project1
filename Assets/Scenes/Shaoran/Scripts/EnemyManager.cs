@@ -75,8 +75,4 @@ public class EnemyManager : MonoBehaviour
         RoundManager.Instance.UpdateGameState(GameState.EnemyTurn);
     }
 
-    public void DeleteEnemy(GameObject enemy) 
-    {
-
-    }
 }
