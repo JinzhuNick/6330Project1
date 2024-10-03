@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour
             enemyClass = enemy.GetComponent<Enemy>();
             enemyClass.ifTurn = true;
             Debug.Log("ifTurnTriggered");
-            while ( enemyClass.ifEndMove == true)
+            while ( enemyClass.ifTurn == true)
                 yield return null;
         }
         RoundManager.Instance.UpdateGameState(GameState.PlayerTurn);
@@ -57,7 +57,7 @@ public class EnemyManager : MonoBehaviour
         characterClass = player.GetComponent<Character>();
 
         characterClass.ifTurn = true;
-        while (characterClass.ifEndMove == true)
+        while (characterClass.ifTurn == true)
             yield return null;
 
         RoundManager.Instance.UpdateGameState(GameState.EnemyTurn);
