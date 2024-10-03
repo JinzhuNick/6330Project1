@@ -58,7 +58,7 @@ public class Character : MonoBehaviour
         }
 
         health = maxHealth;
-
+        onCharacterHurt?.Invoke((float)maxHealth, (float)health, this.gameObject);
     }
 
     void Update()
