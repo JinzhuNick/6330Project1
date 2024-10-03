@@ -69,12 +69,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29573ee2331994e428572023be6058ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   health: 10
-  attackPower: 3
+  minAttack: 2
+  maxAttack: 3
   movementRange: 2
   speed: 2
   detectionRange: 5
   ifTurn: 0
+  ifEndMove: 0
+  ifAttack: 0
+  damageTextPrefab: {fileID: 487530444266444526, guid: 77f77e8a6fc5fdf4cae2e6730d161730,
+    type: 3}
 --- !u!1 &9104579913479980198
 GameObject:
   m_ObjectHideFlags: 0

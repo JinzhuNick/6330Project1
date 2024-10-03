@@ -122,10 +122,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 0
+  maxHealth: 0
   health: 0
   movementRange: 0
   speed: 0
   ifTurn: 0
+  ifEndMove: 0
+  ifAttack: 0
+  gridManager: {fileID: 0}
   currentCell:
     x: 0
     y: 0
@@ -135,6 +139,8 @@ MonoBehaviour:
     isWalkable: 0
     cellState: 0
     cellObject: {fileID: 0}
+  damageTextPrefab: {fileID: 487530444266444526, guid: 77f77e8a6fc5fdf4cae2e6730d161730,
+    type: 3}
 --- !u!1 &5433256450306124154
 GameObject:
   m_ObjectHideFlags: 0

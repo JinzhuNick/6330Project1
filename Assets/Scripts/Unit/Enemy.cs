@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     protected List<GridCell> reachableCells = new List<GridCell>();
     protected List<GridCell> path = new List<GridCell>();
 
+    public GameObject damageTextPrefab;
+
     public virtual void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
@@ -461,9 +463,37 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
         Debug.Log($"敌人受到 {damage} 点伤害，剩余血量：{health}");
+        ShowDamageText(damage);
         if (health <= 0)
         {
             Die();
+        }
+    }
+
+    void ShowDamageText(int damage)
+    {
+        if (damageTextPrefab != null)
+        {
+            // 在角色位置实例化伤害数字
+            GameObject damageTextObj = Instantiate(damageTextPrefab, transform.position + new Vector3(1, -1, 0), Quaternion.Euler(45, 45, 0));
+
+            // 设置父对象为场景中的 Canvas（如果有）
+            Canvas canvas = FindObjectOfType<Canvas>();
+            if (canvas != null)
+            {
+                damageTextObj.transform.SetParent(canvas.transform, false);
+            }
+
+            // 设置伤害数字
+            FloatingText floatingText = damageTextObj.GetComponent<FloatingText>();
+            if (floatingText != null)
+            {
+                floatingText.SetText("-" + damage.ToString());
+            }
+        }
+        else
+        {
+            Debug.LogWarning("无法找到 DamageTextPrefab 预制件。");
         }
     }
 
