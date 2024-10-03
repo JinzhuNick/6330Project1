@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     public float speed;  // 控制移动速度
 
     public bool ifTurn = false;  // 控制角色是否可以移动
+    public bool ifEndMove = false; // 角色是否已经移动完成
     public bool ifAttack = false; // 角色是否进入攻击阶段
 
     public GridManager gridManager;
@@ -63,6 +64,7 @@ public class Character : MonoBehaviour
 
             // 处理鼠标输入
             HandleMouseInput();
+            ifEndMove = true;
         }
 
         if(ifAttack)
@@ -271,6 +273,7 @@ public class Character : MonoBehaviour
         }
         reachableCells.Clear();
         ClearEnemyDetectionRanges();
+        ifEndMove = false;
     }
 
     // 清除敌人索敌范围

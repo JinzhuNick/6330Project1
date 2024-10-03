@@ -11,8 +11,11 @@ public class Enemy : MonoBehaviour
     public int movementRange;
     public float speed;
     public int detectionRange;
+
     public bool ifTurn = false;
+    public bool ifEndMove = false; // 角色是否已经移动完成
     public bool ifAttack = false; // 敌人是否进入攻击阶段
+
 
     protected GridManager gridManager;
     protected GridCell currentCell;
@@ -50,6 +53,7 @@ public class Enemy : MonoBehaviour
         {
             // 高亮可移动的格子
             HighlightReachableCells();
+            ifEndMove = true;
 
             // 检测玩家是否在索敌范围内
             if (IsPlayerInDetectionRange())
@@ -93,6 +97,7 @@ public class Enemy : MonoBehaviour
                 }
                 // 玩家不在索敌范围内，可以执行其他行为
                 ifTurn = false;
+                ifEndMove = false;
             }
         }
         if (ifAttack)
@@ -259,6 +264,7 @@ public class Enemy : MonoBehaviour
             cell.UpdateVisual();
         }
         reachableCells.Clear();
+        ifEndMove = false;
     }
 
     int Heuristic(GridCell a, GridCell b)
@@ -392,6 +398,7 @@ public class Enemy : MonoBehaviour
         ClearDetectionRange();
         // 结束回合
         ifTurn = false;
+        ifEndMove = false;
     }
 
     bool IsPlayerAdjacent()
