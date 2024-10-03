@@ -7,23 +7,27 @@ public class Skill1 : Skill
     public Skill1()
     {
         skillName = "技能1";
-        damageMultiplier = 0.8f; // 80%
-        attackWindup = 0.5f;
+        damageMultiplier = 0.6f;
+        attackWindup = 0.1f;
         attackWinddown = 0.5f;
 
         diceDamageMapping = new Dictionary<int, float>()
         {
-            {1, 0.7f},
-            {2, 0.85f},
+            {1, 0.9f},
+            {2, 0.9f},
             {3, 1.0f},
-            {4, 1.15f},
-            {5, 1.3f},
-            {6, 1.5f}
+            {4, 1.0f},
+            {5, 1.1f},
+            {6, 1.1f}
         };
     }
 
     public override void OnSelect(Character character)
     {
+        foreach (GridCell cell in affectedCells)
+        {
+            cell.ClearCellStates();
+        }
         // 显示周围一圈的格子（包括斜方向）
         int x = character.currentCell.x;
         int y = character.currentCell.y;

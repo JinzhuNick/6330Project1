@@ -9,23 +9,27 @@ public class Skill2 : Skill
     public Skill2()
     {
         skillName = "技能2";
-        damageMultiplier = 1.2f; // 120%
-        attackWindup = 0.5f;
+        damageMultiplier = 0.8f;
+        attackWindup = 0.1f;
         attackWinddown = 0.5f;
 
         diceDamageMapping = new Dictionary<int, float>()
         {
-            {1, 0.9f},
-            {2, 1.0f},
-            {3, 1.1f},
-            {4, 1.2f},
-            {5, 1.3f},
-            {6, 1.5f}
+            {1, 0.7f},
+            {2, 0.9f},
+            {3, 1.0f},
+            {4, 1.1f},
+            {5, 1.2f},
+            {6, 1.3f}
         };
     }
 
     public override void OnSelect(Character character)
     {
+        foreach (GridCell cell in affectedCells)
+        {
+            cell.ClearCellStates();
+        }
         // 初始化，等待玩家选择方向
         UpdateAffectedCells(character);
     }
