@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1365893231157795730}
   - component: {fileID: 8191195623244386819}
   m_Layer: 0
-  m_Name: 'WrappedPastry (BOSS) '
+  m_Name: CreamPuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,13 +71,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29573ee2331994e428572023be6058ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  health: 20
+  maxHealth: 5
+  health: 5
   minAttack: 2
-  maxAttack: 7
-  movementRange: 1
+  maxAttack: 2
+  movementRange: 4
   speed: 2
-  detectionRange: 7
+  detectionRange: 6
   ifTurn: 0
   ifEndMove: 0
   ifAttack: 0
@@ -162,7 +162,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3ed496dfbdef08f459b9a13e008d5912, type: 2}
+  - {fileID: 2100000, guid: 4ae1fd4b03f48c44888ed1975a774f00, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
