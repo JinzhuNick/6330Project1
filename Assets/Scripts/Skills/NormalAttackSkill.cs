@@ -9,24 +9,28 @@ public class NormalAttackSkill : Skill
     public NormalAttackSkill()
     {
         skillName = "普通攻击";
-        damageMultiplier = 1.0f; // 100%
-        attackWindup = 0f;
+        damageMultiplier = 1.0f;
+        attackWindup = 0.1f;
         attackWinddown = 0.5f;
 
         // 掷骰子映射
         diceDamageMapping = new Dictionary<int, float>()
         {
-            {1, 0.8f}, // 80%
-            {2, 0.9f}, // 90%
-            {3, 1.0f}, // 100%
-            {4, 1.1f}, // 110%
-            {5, 1.2f}, // 120%
-            {6, 1.3f}  // 130%
+            {1, 0.8f},
+            {2, 0.9f},
+            {3, 1.0f},
+            {4, 1.1f},
+            {5, 1.2f}, 
+            {6, 1.2f}
         };
     }
 
     public override void OnSelect(Character character)
     {
+        foreach (GridCell cell in affectedCells)
+        {
+            cell.ClearCellStates();
+        }
         //初始情况下不显示任何格子
     }
 

@@ -107,15 +107,15 @@ public class GridManager : MonoBehaviour
         HashSet<CellState> states = cell.GetCellStates();
 
         Color normalColor = new Color(1, 1, 1, 0.1f); // 白色，透明度降低
-        Color highlightedColor = new Color(0, 1, 0, 0.4f); // 绿色
-        Color selectedColor = new Color(1, 1, 0, 0.4f); // 黄色
+        Color highlightedColor = new Color(0, 1, 0, 1f); // 绿色
+        Color selectedColor = new Color(1, 1, 0, 0.3f); // 黄色
         Color blockedColor = new Color(1, 0, 0, 1f); // 红色
 
         Color finalColor = new Color(0, 0, 0, 0);
 
         if (!cell.isWalkable)
         {
-            return new Color(1, 0, 0, 0.4f); // 红色
+            return new Color(1, 0, 0, 0.0f); // 红色
         }
 
         if (states == null || states.Count == 0)
