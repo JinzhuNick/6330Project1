@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public bool ifTurn = false;
     public bool ifEndMove = false; // 角色是否已经移动完成
     public bool ifAttack = false; // 敌人是否进入攻击阶段
+    public bool ifEndAttack = false;
 
 
     protected GridManager gridManager;
@@ -24,6 +25,8 @@ public class Enemy : MonoBehaviour
     protected List<GridCell> path = new List<GridCell>();
 
     public GameObject damageTextPrefab;
+    public GameObject AttackPhase;
+    public GameObject MovePhase;
 
     //Events
     public delegate void OnEnemyDeath(GameObject enemy);
@@ -112,8 +115,22 @@ public class Enemy : MonoBehaviour
         }
         if (ifAttack)
         {
+            AttackPhase.SetActive(true);
             // 攻击逻辑
             StartCoroutine(PerformAttack());
+        }
+        if(ifEndAttack)
+        {
+            AttackPhase.SetActive(true);
+        }
+        else AttackPhase.SetActive(false);
+        if (ifEndMove)
+        {
+            MovePhase.SetActive(true);
+        }
+        else
+        {
+            MovePhase.SetActive(false);
         }
     }
 
@@ -409,6 +426,8 @@ public class Enemy : MonoBehaviour
         // 结束回合
         ifTurn = false;
         ifEndMove = false;
+        ifAttack = false;
+        ifEndAttack = false;
     }
 
     bool IsPlayerAdjacent()
@@ -441,6 +460,7 @@ public class Enemy : MonoBehaviour
     IEnumerator PerformAttack()
     {
         ifAttack = false; // 防止重复进入
+        ifEndAttack = true;
 
         // 检测周围是否有玩家
         Character player = CheckForPlayerInRange();
