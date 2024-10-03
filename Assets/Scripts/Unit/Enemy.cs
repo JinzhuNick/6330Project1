@@ -486,13 +486,7 @@ public class Enemy : MonoBehaviour
         {
             // 在角色位置实例化伤害数字
             GameObject damageTextObj = Instantiate(damageTextPrefab, transform.position + new Vector3(1, -1, 0), Quaternion.Euler(45, 45, 0));
-
-            // 设置父对象为场景中的 Canvas（如果有）
-            Canvas canvas = FindObjectOfType<Canvas>();
-            if (canvas != null)
-            {
-                damageTextObj.transform.SetParent(canvas.transform, false);
-            }
+            damageTextObj.transform.SetParent(this.gameObject.transform);
 
             // 设置伤害数字
             FloatingText floatingText = damageTextObj.GetComponent<FloatingText>();

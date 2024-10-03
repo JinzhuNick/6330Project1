@@ -5,7 +5,7 @@ public class FloatingText : MonoBehaviour
 {
     public float floatSpeed = 1f;      // 漂浮速度
     public float fadeDuration = 1f;    // 淡出持续时间
-    public Vector3 offset = new Vector3(0, 1.5f, 0);   // 初始偏移
+    public Vector3 offset = new Vector3(0, 2f, 0);   // 初始偏移
     public Vector3 randomOffset = new Vector3(0.1f, 0.1f, 0);
 
     private float timer = 0f;
