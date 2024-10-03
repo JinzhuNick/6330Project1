@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using static Character;
 
 public class Enemy : MonoBehaviour
 {
@@ -58,6 +59,9 @@ public class Enemy : MonoBehaviour
         {
             Debug.LogError("单位初始化位置不在任何格子上！");
         }
+
+        health = maxHealth;
+        onEnemyHurt?.Invoke((float)maxHealth, (float)health, this.gameObject);
     }
 
     void Update()

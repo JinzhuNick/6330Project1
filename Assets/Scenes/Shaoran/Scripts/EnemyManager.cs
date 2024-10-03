@@ -51,8 +51,10 @@ public class EnemyManager : MonoBehaviour
             enemyClass = enemy.GetComponent<Enemy>();
             enemyClass.ifTurn = true;
             enemyClass.ifEndMove = true;
+            enemyClass.ifAttack = true;
+            enemyClass.ifEndAttack = true;
             Debug.Log("ifTurnTriggered");
-            while ( enemyClass.ifEndMove == true)
+            while ( enemyClass.ifEndAttack == true)
                 yield return null;
             enemyClass.ifAttack = true;
         }
