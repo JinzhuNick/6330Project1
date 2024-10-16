@@ -267,7 +267,7 @@ public class Enemy : MonoBehaviour
             currentCell = cell;
 
             // 更新朝向
-            //UpdateFacingDirection(transform.position, cell.GetCenterPosition());
+            UpdateFacingDirection(transform.position, cell.GetCenterPosition());
 
             // 平滑移动到下一个格子
             Vector3 startPosition = transform.position;
