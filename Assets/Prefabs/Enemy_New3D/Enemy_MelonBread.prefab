@@ -73,8 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   health: 10
-  minAttack: 1
-  maxAttack: 3
+  minAttack: 5
+  maxAttack: 10
   movementRange: 3
   speed: 2
   detectionRange: 5
