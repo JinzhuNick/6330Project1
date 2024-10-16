@@ -52,7 +52,7 @@ public class NormalAttackSkill : Skill
         UpdateTargetCell(character);
 
         // 处理鼠标点击
-        if (Input.GetMouseButtonDown(0) && targetCell != null)
+        if (GameManager.Instance.ifClickable == true && Input.GetMouseButtonDown(0) && targetCell != null)
         {
             if(GameManager.Instance.useDice == true)
             {
@@ -148,6 +148,7 @@ public class NormalAttackSkill : Skill
 
     protected override IEnumerator ExecuteSkill(Character character)
     {
+        GameManager.Instance.ifClickable = false;
         int finalDamage = 0;
         // 前摇
         yield return new WaitForSeconds(attackWindup);
@@ -198,5 +199,6 @@ public class NormalAttackSkill : Skill
         {
             dice.GetComponent<MeshRenderer>().enabled = false;
         }
+        GameManager.Instance.ifClickable = true;
     }
 }

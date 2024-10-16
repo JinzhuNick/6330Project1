@@ -68,7 +68,7 @@ public class Skill1 : Skill
         // 技能范围已固定，不需要动态更新
 
         // 处理鼠标点击
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.Instance.ifClickable == true && Input.GetMouseButtonDown(0))
         {
             if (GameManager.Instance.useDice == true)
             {
@@ -88,6 +88,7 @@ public class Skill1 : Skill
 
     protected override IEnumerator ExecuteSkill(Character character)
     {
+        GameManager.Instance.ifClickable = false;
         int finalDamage = 0;
         // 前摇
         yield return new WaitForSeconds(attackWindup);
@@ -143,5 +144,6 @@ public class Skill1 : Skill
         {
             dice.GetComponent<MeshRenderer>().enabled = false;
         }
+        GameManager.Instance.ifClickable = true;
     }
 }

@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public bool ifTurn = false;  // 控制角色是否可以移动
     public bool ifEndMove = false; // 角色是否已经移动完成
     public bool ifAttack = false; // 角色是否进入攻击阶段
+    
 
     public GridManager gridManager;
     public GridCell currentCell;
@@ -65,7 +66,6 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(ifEndMove);
         if (ifTurn)
         {
             // 高亮可移动的格子
@@ -74,12 +74,13 @@ public class Character : MonoBehaviour
             // 显示敌人的索敌范围
             ShowEnemyDetectionRanges();
 
+            ifEndMove = true;
             // 处理鼠标输入
             HandleMouseInput();
-            ifEndMove = true;
+
         }
 
-        if(ifAttack)
+        if (ifAttack)
         {
             // 攻击逻辑
             HandleAttackInput();
@@ -161,7 +162,7 @@ public class Character : MonoBehaviour
     // 处理鼠标输入
     void HandleMouseInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.Instance.ifClickable == true && Input.GetMouseButtonDown(0))
         {
             // 发射一条射线检测鼠标点击的位置
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -182,9 +183,8 @@ public class Character : MonoBehaviour
                         reachableCells.Clear();
                         ClearEnemyDetectionRanges();
                         ifTurn = false;
-                        Debug.Log(ifEndMove);
+                        Debug.Log("关闭ifturn");
                         ifEndMove = false;
-                        Debug.Log(ifEndMove);
                         return;
                     }
                     // 计算路径并开始移动
@@ -277,6 +277,7 @@ public class Character : MonoBehaviour
     // 启动协程，按照路径移动
     IEnumerator MoveAlongPath()
     {
+        GameManager.Instance.ifClickable = false;
         foreach (GridCell cell in path)
         {
             // 更新格子的占据信息
@@ -314,6 +315,7 @@ public class Character : MonoBehaviour
         reachableCells.Clear();
         ClearEnemyDetectionRanges();
         ifEndMove = false;
+        GameManager.Instance.ifClickable = true;
     }
 
     // 清除敌人索敌范围
@@ -358,25 +360,29 @@ public class Character : MonoBehaviour
     void HandleAttackInput()
     {
         // 选择技能
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.Alpha1))
         {
+            CancelAttack();
             SelectSkill(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.Alpha2))
         {
+            CancelAttack();
             SelectSkill(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.Alpha3))
         {
+            CancelAttack();
             SelectSkill(2);
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.S))
         {
+            CancelAttack();
             ifAttack = false;
         }
 
         // 取消攻击
-        if (Input.GetKeyDown(KeyCode.X))
+        if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.X))
         {
             CancelAttack();
         }

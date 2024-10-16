@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public bool useDice = false; // 记录玩家的选择
+    public bool ifClickable = true;//角色是否能点
 
     private void Awake()
     {

@@ -52,7 +52,7 @@ public class Skill2 : Skill
         UpdateAffectedCells(character);
 
         // 处理鼠标点击
-        if (Input.GetMouseButtonDown(0) && affectedCells.Count > 0)
+        if (GameManager.Instance.ifClickable == true && Input.GetMouseButtonDown(0) && affectedCells.Count > 0)
         {
             if (GameManager.Instance.useDice == true)
             {
@@ -75,6 +75,7 @@ public class Skill2 : Skill
             character.selectedSkill = null;
         }
     }
+
 
     void UpdateAffectedCells(Character character)
     {
@@ -148,6 +149,7 @@ public class Skill2 : Skill
 
     protected override IEnumerator ExecuteSkill(Character character)
     {
+        GameManager.Instance.ifClickable = false;
         int finalDamage = 0;
         // 前摇
         yield return new WaitForSeconds(attackWindup);
@@ -199,6 +201,6 @@ public class Skill2 : Skill
         {
             dice.GetComponent<MeshRenderer>().enabled = false;
         }
-        
+        GameManager.Instance.ifClickable = true;
     }
 }
