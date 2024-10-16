@@ -370,6 +370,10 @@ public class Character : MonoBehaviour
         {
             SelectSkill(2);
         }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            ifAttack = false;
+        }
 
         // 取消攻击
         if (Input.GetKeyDown(KeyCode.X))
