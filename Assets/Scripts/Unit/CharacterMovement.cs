@@ -421,7 +421,7 @@ public class Character : MonoBehaviour
         {
             // 在角色位置实例化伤害数字
             GameObject damageTextObj = Instantiate(damageTextPrefab, transform.position+new Vector3(1,-1,0), Quaternion.Euler(45, 45, 0));
-            damageTextObj.transform.SetParent(this.gameObject.transform);
+            //damageTextObj.transform.SetParent(this.gameObject.transform);
 
             // 设置父对象为场景中的 Canvas（如果有）
             /*

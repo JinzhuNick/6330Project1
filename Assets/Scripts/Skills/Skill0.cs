@@ -54,12 +54,16 @@ public class NormalAttackSkill : Skill
         // 处理鼠标点击
         if (Input.GetMouseButtonDown(0) && targetCell != null)
         {
-            dice = GameObject.FindGameObjectWithTag("Dice");
-            dice.GetComponent<MeshRenderer>().enabled = true;
+            if(GameManager.Instance.useDice == true)
+            {
+                dice = GameObject.FindGameObjectWithTag("Dice");
+                dice.GetComponent<MeshRenderer>().enabled = true;
 
-            diceRollScript = dice.GetComponent<DiceRoll>();
+                diceRollScript = dice.GetComponent<DiceRoll>();
 
-            diceRollScript.StartRoll();
+                diceRollScript.StartRoll();
+            }
+            
             // 开始执行技能
             character.StartCoroutine(ExecuteSkill(character));
             
@@ -144,22 +148,32 @@ public class NormalAttackSkill : Skill
 
     protected override IEnumerator ExecuteSkill(Character character)
     {
+        int finalDamage = 0;
         // 前摇
         yield return new WaitForSeconds(attackWindup);
 
-        // 掷骰子
-        // int diceResult = Random.Range(1, 7);
-        dice = GameObject.FindGameObjectWithTag("Dice");
-        diceRollScript = dice.GetComponent<DiceRoll>();
-        while (diceRollScript.isRolling)
+        if(GameManager.Instance.useDice == true)
         {
-            yield return null;
+            // 掷骰子
+            // int diceResult = Random.Range(1, 7);
+            dice = GameObject.FindGameObjectWithTag("Dice");
+            diceRollScript = dice.GetComponent<DiceRoll>();
+            while (diceRollScript.isRolling)
+            {
+                yield return null;
+
+            }
+            float damageBonus = diceDamageMapping[diceRollScript.finalFaceValue];
+            // 计算伤害
+            int standardDamage = Mathf.RoundToInt(character.attackPower * damageMultiplier);
+            finalDamage = Mathf.RoundToInt(standardDamage * damageBonus);
 
         }
-        float damageBonus = diceDamageMapping[diceRollScript.finalFaceValue];
-        // 计算伤害
-        int standardDamage = Mathf.RoundToInt(character.attackPower * damageMultiplier);
-        int finalDamage = Mathf.RoundToInt(standardDamage * damageBonus);
+        else
+        {
+            // 计算伤害，此处为固定伤害
+            finalDamage = Mathf.RoundToInt(character.attackPower * damageMultiplier);
+        }
 
         // 对目标造成伤害
         if (targetCell.occupant != null)
@@ -171,6 +185,7 @@ public class NormalAttackSkill : Skill
             }
         }
 
+
         // 后摇
         yield return new WaitForSeconds(attackWinddown);
 
@@ -179,6 +194,9 @@ public class NormalAttackSkill : Skill
         //character.EndTurn(); // 如果需要，可以结束回合
         OnCancel(character); // 清除高亮
         character.selectedSkill = null;
-        dice.GetComponent<MeshRenderer>().enabled = false;
+        if (GameManager.Instance.useDice == true)
+        {
+            dice.GetComponent<MeshRenderer>().enabled = false;
+        }
     }
 }
