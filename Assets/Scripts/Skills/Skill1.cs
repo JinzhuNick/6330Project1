@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Skill1 : Skill
 {
+    public DiceRoll diceRollScript;
+    public GameObject dice;
+
+
     public Skill1()
     {
         skillName = "技能1";
@@ -66,8 +70,16 @@ public class Skill1 : Skill
         // 处理鼠标点击
         if (Input.GetMouseButtonDown(0))
         {
+
+            dice = GameObject.FindGameObjectWithTag("Dice");
+            dice.GetComponent<MeshRenderer >().enabled = true;
+           
+            diceRollScript = dice.GetComponent<DiceRoll>();
+
+            diceRollScript.StartRoll();
             // 开始执行技能
             character.StartCoroutine(ExecuteSkill(character));
+
             
         }
     }
@@ -78,8 +90,16 @@ public class Skill1 : Skill
         yield return new WaitForSeconds(attackWindup);
 
         // 掷骰子
-        int diceResult = Random.Range(1, 7);
-        float damageBonus = diceDamageMapping[diceResult];
+        // int diceResult = Random.Range(1, 7);
+        dice = GameObject.FindGameObjectWithTag("Dice");
+        diceRollScript = dice.GetComponent<DiceRoll>();
+        while (diceRollScript.isRolling)
+        {
+            yield return null;
+
+        }
+
+        float damageBonus = diceDamageMapping[diceRollScript.finalFaceValue];
 
         // 计算伤害
         int standardDamage = Mathf.RoundToInt(character.attackPower * damageMultiplier);
@@ -108,5 +128,6 @@ public class Skill1 : Skill
         //character.EndTurn(); // 如果需要，可以结束回合
         OnCancel(character); // 清除高亮
         character.selectedSkill = null;
+        dice.GetComponent<MeshRenderer>().enabled = false;
     }
 }
