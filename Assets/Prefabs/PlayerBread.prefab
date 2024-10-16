@@ -135,8 +135,8 @@ Transform:
   m_GameObject: {fileID: 3102569522241840040}
   serializedVersion: 2
   m_LocalRotation: {x: 0.14332145, y: -0.8566396, z: 0.34600857, w: 0.35483173}
-  m_LocalPosition: {x: 0, y: 0.55, z: 0}
-  m_LocalScale: {x: 0.15222706, y: 0.15222706, z: 0.15222706}
+  m_LocalPosition: {x: 0.47, y: 0.666, z: 0.43}
+  m_LocalScale: {x: 0.15222706, y: 0.15222706, z: 0.19600756}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4528357278786018079}
@@ -339,7 +339,7 @@ PrefabInstance:
     - target: {fileID: 2448463538936525980, guid: 2d8c08a31fe361146a9517093cdd98c7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 128
+      value: 320.5
       objectReference: {fileID: 0}
     - target: {fileID: 2448463538936525980, guid: 2d8c08a31fe361146a9517093cdd98c7,
         type: 3}
@@ -415,6 +415,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Healthbar Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889448966058801860, guid: 345906b8eadb2554aadc674c16ed6e8e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889448966058801860, guid: 345906b8eadb2554aadc674c16ed6e8e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4889448966058801860, guid: 345906b8eadb2554aadc674c16ed6e8e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963025760202480729, guid: 345906b8eadb2554aadc674c16ed6e8e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 95.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378434636824899569, guid: 345906b8eadb2554aadc674c16ed6e8e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 7722166101445539224, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
@@ -509,7 +534,7 @@ PrefabInstance:
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.08
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 8589751233531415534, guid: 345906b8eadb2554aadc674c16ed6e8e,
         type: 3}
@@ -670,12 +695,12 @@ PrefabInstance:
     - target: {fileID: 503591732527264518, guid: b2117778f02cdab4f9d69fe18cdc77a3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 95
+      value: 95.000015
       objectReference: {fileID: 0}
     - target: {fileID: 503591732527264518, guid: b2117778f02cdab4f9d69fe18cdc77a3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 137
+      value: 329.49994
       objectReference: {fileID: 0}
     - target: {fileID: 503591732527264518, guid: b2117778f02cdab4f9d69fe18cdc77a3,
         type: 3}
