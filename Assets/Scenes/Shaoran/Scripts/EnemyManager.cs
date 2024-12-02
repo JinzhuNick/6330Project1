@@ -60,6 +60,12 @@ public class EnemyManager : MonoBehaviour
                 yield return null;
 
         }
+        if (CheckEnemyList())
+        {
+            RoundManager.Instance.UpdateGameState(GameState.Victory);
+            Debug.Log("You Win");
+        }
+        else
         RoundManager.Instance.UpdateGameState(GameState.PlayerTurn);
     }
 
@@ -77,6 +83,19 @@ public class EnemyManager : MonoBehaviour
         while(characterClass.ifAttack == true)
             yield return null;
         RoundManager.Instance.UpdateGameState(GameState.EnemyTurn);
+    }
+
+    public bool CheckEnemyList() 
+    {
+        return enemyGameObjects.Count == 0;
+    }
+
+    public void UpdateGameWinState() 
+    {
+        if (CheckEnemyList()) 
+        {
+
+        }
     }
 
 }
