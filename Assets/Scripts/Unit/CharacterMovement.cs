@@ -423,6 +423,7 @@ public class Character : MonoBehaviour
     void SkipAttack()
     {
         CancelAttack();
+        ifAttack = false;
         // 其他跳过逻辑
         Debug.Log("Skipped Attack");
     }

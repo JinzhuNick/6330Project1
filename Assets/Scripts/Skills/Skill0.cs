@@ -13,7 +13,7 @@ public class NormalAttackSkill : Skill
         skillName = "普通攻击";
         damageMultiplier = 1.0f;
         attackWindup = 0.1f;
-        attackWinddown = 0.5f;
+        attackWinddown = 1.5f;
 
         // 掷骰子映射
         diceDamageMapping = new Dictionary<int, float>()

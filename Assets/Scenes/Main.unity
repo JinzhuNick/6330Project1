@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 269671254}
   - component: {fileID: 269671253}
   - component: {fileID: 269671252}
+  - component: {fileID: 269671255}
   m_Layer: 5
   m_Name: NoDice
   m_TagString: Untagged
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1354462673}
+      - m_Target: {fileID: 269671255}
         m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
         m_MethodName: OnStartButtonClicked
         m_Mode: 6
@@ -330,6 +331,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269671250}
   m_CullTransparentMesh: 1
+--- !u!114 &269671255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269671250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07fbd6e1c5a35804483d3a2d15ede421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &658142364
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +857,7 @@ GameObject:
   - component: {fileID: 1994538151}
   - component: {fileID: 1994538150}
   - component: {fileID: 1994538149}
+  - component: {fileID: 1994538152}
   m_Layer: 5
   m_Name: Dice
   m_TagString: Untagged
@@ -915,7 +929,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1354462673}
+      - m_Target: {fileID: 1994538152}
         m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
         m_MethodName: OnStartButtonClicked
         m_Mode: 6
@@ -965,6 +979,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994538147}
   m_CullTransparentMesh: 1
+--- !u!114 &1994538152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994538147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07fbd6e1c5a35804483d3a2d15ede421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2058268642
 GameObject:
   m_ObjectHideFlags: 0

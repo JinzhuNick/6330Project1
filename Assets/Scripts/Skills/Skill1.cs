@@ -13,7 +13,7 @@ public class Skill1 : Skill
         skillName = "技能1";
         damageMultiplier = 0.6f;
         attackWindup = 0.1f;
-        attackWinddown = 0.5f;
+        attackWinddown = 1.5f;
 
         diceDamageMapping = new Dictionary<int, float>()
         {
