@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class Character : MonoBehaviour
@@ -26,11 +27,21 @@ public class Character : MonoBehaviour
     public GameObject AttackPhase;
     public GameObject MovePhase;
 
+    public Animator animator;
+
+
+
 
     // 技能列表
     private List<Skill> skills = new List<Skill>();
     // 当前选择的技能
     public Skill selectedSkill = null;
+
+    public Button skill1Button;
+    public Button skill2Button;
+    public Button skill3Button;
+    public Button skipButton;
+    public Button cancelButton;
 
     //Events
     public delegate void OnCharacterHurt(float maxHealth, float currentHealth, GameObject hurtObject);
@@ -38,6 +49,13 @@ public class Character : MonoBehaviour
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
+
+        // 绑定按钮事件
+        skill1Button.onClick.AddListener(() => SelectSkill(0));
+        skill2Button.onClick.AddListener(() => SelectSkill(1));
+        skill3Button.onClick.AddListener(() => SelectSkill(2));
+        skipButton.onClick.AddListener(() => SkipAttack());
+        //cancelButton.onClick.AddListener(CancelAttack);
 
         // 初始化技能
         skills.Add(new NormalAttackSkill());
@@ -278,6 +296,7 @@ public class Character : MonoBehaviour
     IEnumerator MoveAlongPath()
     {
         GameManager.Instance.ifClickable = false;
+        animator.SetBool("isRunning", true);
         foreach (GridCell cell in path)
         {
             // 更新格子的占据信息
@@ -286,7 +305,7 @@ public class Character : MonoBehaviour
             currentCell = cell;
 
             // 更新朝向
-            //UpdateFacingDirection(transform.position, cell.GetCenterPosition());
+            UpdateFacingDirection(transform.position, cell.GetCenterPosition());
 
             // 平滑移动到下一个格子
             Vector3 startPosition = transform.position;
@@ -312,6 +331,7 @@ public class Character : MonoBehaviour
             //cell.AddCellState(CellState.Normal);
             cell.UpdateVisual();
         }
+        animator.SetBool("isRunning", false);
         reachableCells.Clear();
         ClearEnemyDetectionRanges();
         ifEndMove = false;
@@ -359,32 +379,18 @@ public class Character : MonoBehaviour
 
     void HandleAttackInput()
     {
-        // 选择技能
-        if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.Alpha1))
+        if (GameManager.Instance.ifClickable)
         {
-            CancelAttack();
-            SelectSkill(0);
-        }
-        else if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CancelAttack();
-            SelectSkill(1);
-        }
-        else if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            CancelAttack();
-            SelectSkill(2);
-        }
-        else if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.S))
-        {
-            CancelAttack();
-            ifAttack = false;
-        }
+            // 键盘选择技能
+            if (Input.GetKeyDown(KeyCode.Alpha1)) SelectSkill(0);
+            else if (Input.GetKeyDown(KeyCode.Alpha2)) SelectSkill(1);
+            else if (Input.GetKeyDown(KeyCode.Alpha3)) SelectSkill(2);
 
-        // 取消攻击
-        if (GameManager.Instance.ifClickable == true && Input.GetKeyDown(KeyCode.X))
-        {
-            CancelAttack();
+            // 跳过攻击
+            if (Input.GetKeyDown(KeyCode.S)) SkipAttack();
+
+            // 取消攻击
+            if (Input.GetKeyDown(KeyCode.X)) CancelAttack();
         }
 
         // 处理技能释放
@@ -393,24 +399,32 @@ public class Character : MonoBehaviour
             selectedSkill.UpdateSkill(this);
         }
 
-        void SelectSkill(int index)
-        {
-            if (index >= 0 && index < skills.Count)
-            {
-                selectedSkill = skills[index];
-                selectedSkill.OnSelect(this);
-            }
-        }
+    }
 
-        void CancelAttack()
+    void SelectSkill(int index)
+    {
+        if (index >= 0 && index < skills.Count)
         {
-            if (selectedSkill != null)
-            {
-                selectedSkill.OnCancel(this);
-                selectedSkill = null;
-            }
+            CancelAttack(); // 先取消当前技能
+            selectedSkill = skills[index];
+            selectedSkill.OnSelect(this);
         }
+    }
 
+    void CancelAttack()
+    {
+        if (selectedSkill != null)
+        {
+            selectedSkill.OnCancel(this);
+            selectedSkill = null;
+        }
+    }
+
+    void SkipAttack()
+    {
+        CancelAttack();
+        // 其他跳过逻辑
+        Debug.Log("Skipped Attack");
     }
     // 受到伤害
     public void TakeDamage(int damage)

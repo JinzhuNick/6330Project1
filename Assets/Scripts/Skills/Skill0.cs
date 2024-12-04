@@ -195,10 +195,13 @@ public class NormalAttackSkill : Skill
             finalDamage = Mathf.RoundToInt(character.attackPower * damageMultiplier);
         }
 
+        character.animator.SetTrigger("isAttacking");
+
         // 对目标造成伤害
         if (targetCell.occupant != null)
         {
             Enemy enemy = targetCell.occupant.GetComponent<Enemy>();
+            
             if (enemy != null)
             {
                 enemy.TakeDamage(finalDamage);

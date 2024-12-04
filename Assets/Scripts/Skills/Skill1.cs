@@ -117,7 +117,8 @@ public class Skill1 : Skill
         {
             finalDamage = Mathf.RoundToInt(character.attackPower * damageMultiplier);
         }
-        
+        character.animator.SetTrigger("isAttacking");
+
 
         // 对范围内的敌人造成伤害
         foreach (GridCell cell in affectedCells)
