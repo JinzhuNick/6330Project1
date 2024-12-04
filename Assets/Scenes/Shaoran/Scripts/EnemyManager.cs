@@ -19,6 +19,11 @@ public class EnemyManager : MonoBehaviour
     private void OnEnemyDeath(GameObject enemy)
     {
         enemyGameObjects.Remove(enemy);
+        if (CheckEnemyList())
+        {
+            RoundManager.Instance.UpdateGameState(GameState.Victory);
+            Debug.Log("You Win!");
+        }
     }
 
     private void Start()
@@ -74,7 +79,12 @@ public class EnemyManager : MonoBehaviour
         Character characterClass;
         
         characterClass = player.GetComponent<Character>();
-
+        if (CheckPlayerHealth())
+        {
+            RoundManager.Instance.UpdateGameState(GameState.Lose);
+            Debug.Log("You Lose!");
+            yield break; 
+        }
         characterClass.ifTurn = true;
         characterClass.ifEndMove = true;
         while (characterClass.ifEndMove == true)
@@ -90,12 +100,10 @@ public class EnemyManager : MonoBehaviour
         return enemyGameObjects.Count == 0;
     }
 
-    public void UpdateGameWinState() 
+    private bool CheckPlayerHealth()
     {
-        if (CheckEnemyList()) 
-        {
-
-        }
+        Character characterClass = player.GetComponent<Character>();
+        return characterClass.health <= 0; 
     }
 
 }
