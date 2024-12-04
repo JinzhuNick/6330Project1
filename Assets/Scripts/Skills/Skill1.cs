@@ -65,6 +65,8 @@ public class Skill1 : Skill
 
     public override void UpdateSkill(Character character)
     {
+        if (isSkillActivated) return;
+
         // 技能范围已固定，不需要动态更新
 
         // 处理鼠标点击

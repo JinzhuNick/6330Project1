@@ -48,12 +48,20 @@ public class Skill2 : Skill
 
     public override void UpdateSkill(Character character)
     {
+        if (isSkillActivated) return;
         // 根据鼠标位置更新攻击方向和范围
         UpdateAffectedCells(character);
 
         // 处理鼠标点击
         if (GameManager.Instance.ifClickable == true && Input.GetMouseButtonDown(0) && affectedCells.Count > 0)
         {
+            // 锁定技能
+            isSkillActivated = true;
+
+            // 存储执行时的目标格子
+            executionCells.Clear();
+            executionCells.AddRange(affectedCells);
+
             if (GameManager.Instance.useDice == true)
             {
                 dice = GameObject.FindGameObjectWithTag("Dice");
@@ -63,6 +71,7 @@ public class Skill2 : Skill
 
                 diceRollScript.StartRoll();
             }
+
             // 开始执行技能
             character.StartCoroutine(ExecuteSkill(character));
             
@@ -79,6 +88,11 @@ public class Skill2 : Skill
 
     void UpdateAffectedCells(Character character)
     {
+        if (isSkillActivated)
+        {
+            return; // 如果技能已激活，停止更新目标格子
+        }
+
         // 清除之前的高亮
         foreach (GridCell cell in affectedCells)
         {
@@ -149,6 +163,12 @@ public class Skill2 : Skill
 
     protected override IEnumerator ExecuteSkill(Character character)
     {
+        // 在技能执行期间，高亮锁定的目标格子
+        foreach (GridCell cell in executionCells)
+        {
+            cell.AddCellState(CellState.Active);
+        }
+
         GameManager.Instance.ifClickable = false;
         int finalDamage = 0;
         // 前摇
@@ -191,6 +211,8 @@ public class Skill2 : Skill
 
         // 后摇
         yield return new WaitForSeconds(attackWinddown);
+        
+        isSkillActivated = false;
 
         // 攻击结束
         character.ifAttack = false;

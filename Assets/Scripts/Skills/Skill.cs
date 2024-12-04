@@ -12,6 +12,12 @@ public abstract class Skill
 
     protected List<GridCell> affectedCells = new List<GridCell>();
 
+    // 表示技能是否已被激活（已点击）
+    protected bool isSkillActivated = false;
+
+    // 存储技能执行时的目标格子
+    protected List<GridCell> executionCells = new List<GridCell>();
+
     // 当技能被选择时调用
     public abstract void OnSelect(Character character);
 

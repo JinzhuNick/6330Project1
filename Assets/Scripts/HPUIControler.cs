@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HPUIControler : MonoBehaviour
 {
+    /*
     private Quaternion initialRotation;
 
     void Start()
@@ -17,4 +18,5 @@ public class HPUIControler : MonoBehaviour
         // 每帧将旋转重置为初始值
         transform.rotation = initialRotation;
     }
+    */
 }

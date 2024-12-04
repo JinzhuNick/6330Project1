@@ -48,13 +48,21 @@ public class NormalAttackSkill : Skill
 
     public override void UpdateSkill(Character character)
     {
+        if (isSkillActivated) return;
         // 获取鼠标相对于角色的方向
         UpdateTargetCell(character);
 
         // 处理鼠标点击
         if (GameManager.Instance.ifClickable == true && Input.GetMouseButtonDown(0) && targetCell != null)
         {
-            if(GameManager.Instance.useDice == true)
+            // 锁定技能
+            isSkillActivated = true;
+
+            // 存储执行时的目标格子
+            executionCells.Clear();
+            executionCells.Add(targetCell);
+
+            if (GameManager.Instance.useDice == true)
             {
                 dice = GameObject.FindGameObjectWithTag("Dice");
                 dice.GetComponent<MeshRenderer>().enabled = true;
@@ -79,6 +87,11 @@ public class NormalAttackSkill : Skill
 
     void UpdateTargetCell(Character character)
     {
+        if (isSkillActivated)
+        {
+            return; // 如果技能已激活，停止更新目标格子
+        }
+
         // 清除之前的高亮
         if (targetCell != null)
         {
@@ -148,6 +161,12 @@ public class NormalAttackSkill : Skill
 
     protected override IEnumerator ExecuteSkill(Character character)
     {
+        // 在技能执行期间，高亮锁定的目标格子
+        foreach (GridCell cell in executionCells)
+        {
+            cell.AddCellState(CellState.Active);
+        }
+
         GameManager.Instance.ifClickable = false;
         int finalDamage = 0;
         // 前摇
@@ -191,6 +210,7 @@ public class NormalAttackSkill : Skill
         yield return new WaitForSeconds(attackWinddown);
 
         // 攻击结束
+        isSkillActivated = false;
         character.ifAttack = false;
         //character.EndTurn(); // 如果需要，可以结束回合
         OnCancel(character); // 清除高亮
