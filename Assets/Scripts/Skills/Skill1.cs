@@ -81,6 +81,7 @@ public class Skill1 : Skill
 
                 diceRollScript.StartRoll();
             }
+            character.UpdateFacingDirection(character.transform.position, GetMouseWorldPosition());
             // 开始执行技能
             character.StartCoroutine(ExecuteSkill(character));
 
@@ -148,5 +149,17 @@ public class Skill1 : Skill
             dice.GetComponent<MeshRenderer>().enabled = false;
         }
         GameManager.Instance.ifClickable = true;
+    }
+
+    Vector3 GetMouseWorldPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayDistance;
+        if (groundPlane.Raycast(ray, out rayDistance))
+        {
+            return ray.GetPoint(rayDistance);
+        }
+        return Vector3.zero;
     }
 }

@@ -349,7 +349,7 @@ public class Character : MonoBehaviour
     }
 
     // 更新角色朝向
-    void UpdateFacingDirection(Vector3 fromPosition, Vector3 toPosition)
+    public void UpdateFacingDirection(Vector3 fromPosition, Vector3 toPosition)
     {
         Vector3 direction = toPosition - fromPosition;
         direction.y = 0;  // 忽略Y轴

@@ -72,6 +72,10 @@ public class Skill2 : Skill
                 diceRollScript.StartRoll();
             }
 
+            GridCell firstCell = affectedCells[0];
+            Vector3 targetPos = firstCell.GetCenterPosition();
+            character.UpdateFacingDirection(character.transform.position, targetPos);
+
             // 开始执行技能
             character.StartCoroutine(ExecuteSkill(character));
             

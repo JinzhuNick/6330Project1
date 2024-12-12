@@ -71,7 +71,8 @@ public class NormalAttackSkill : Skill
 
                 diceRollScript.StartRoll();
             }
-            
+            character.UpdateFacingDirection(character.transform.position, targetCell.GetCenterPosition());
+
             // 开始执行技能
             character.StartCoroutine(ExecuteSkill(character));
             
