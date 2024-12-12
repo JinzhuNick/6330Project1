@@ -145,6 +145,7 @@ public class NormalAttackSkill : Skill
             cell.AddCellState(CellState.Active);
             targetCell = cell;
         }
+
     }
 
     Vector3 GetMouseWorldPosition()
@@ -225,4 +226,6 @@ public class NormalAttackSkill : Skill
         }
         GameManager.Instance.ifClickable = true;
     }
+
+
 }

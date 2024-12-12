@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     public GameObject damageTextPrefab;
     public GameObject AttackPhase;
     public GameObject MovePhase;
+    public GameObject arrowGameObject; // 用于显示箭头的对象
 
     //Events
     public delegate void OnEnemyDeath(GameObject enemy);
@@ -62,6 +63,11 @@ public class Enemy : MonoBehaviour
 
         health = maxHealth;
         onEnemyHurt?.Invoke((float)maxHealth, (float)health, this.gameObject);
+
+        if (arrowGameObject != null)
+        {
+            arrowGameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -531,5 +537,21 @@ public class Enemy : MonoBehaviour
         currentCell.occupant = null;
         onEnemyDeath?.Invoke(this.gameObject);
         Destroy(gameObject);
+    }
+
+    public void ShowArrow()
+    {
+        if (arrowGameObject != null)
+        {
+            arrowGameObject.SetActive(true);
+        }
+    }
+
+    public void HideArrow()
+    {
+        if (arrowGameObject != null)
+        {
+            arrowGameObject.SetActive(false);
+        }
     }
 }
